@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import { globalStyles } from '../Styles/global';
 import Card from '../shared/Card';
 
 export default function Home({ navigation }) {
-  const [review, setReview] = useState([
+  const [review] = useState([
     { title: 'Zelda , Breath of fresh Air', rating: 5, body: 'lorem ipsum', key: '1' },
     { title: 'Gota catch them all', rating: 4, body: 'lorem ipsum', key: '2' },
     { title: 'This is a rating text', rating: 2, body: 'lorem ipsum', key: '3' },

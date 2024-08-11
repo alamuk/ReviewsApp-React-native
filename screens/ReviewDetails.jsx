@@ -17,5 +17,3 @@ export default function ReviewDetails({ route }) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({});
