@@ -1,16 +1,21 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+import { globalStyles } from '../Styles/global';
+import Card from '../shared/Card';
 
-export default function ReviewDetails() {
+export default function ReviewDetails({ route }) {
+  // console.log(route);
+
+  const item = route.params;
   return (
-    <View style={styles.container}>
-      <Text>Review Screen</Text>
+    <View style={globalStyles.container}>
+      <Card>
+        <Text style={globalStyles.titleText}> {item.title}</Text>
+        <Text style={globalStyles.paragraph}> {item.body}</Text>
+        <Text style={globalStyles.paragraph}> {item.rating}</Text>
+      </Card>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    padding: 40,
-  },
-});
+const styles = StyleSheet.create({});
