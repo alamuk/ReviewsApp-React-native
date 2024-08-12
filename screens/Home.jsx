@@ -1,30 +1,49 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, FlatList, TouchableOpacity, Modal } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  Modal,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
 import { globalStyles } from '../Styles/global';
 import Card from '../shared/Card';
 import { MaterialIcons } from '@expo/vector-icons';
+import ReviewForm from './ReviewForm';
 
 export default function Home({ navigation }) {
-  const [review] = useState([
+  const [modalOpen, setModalOpen] = useState(false);
+  const [review, setReview] = useState([
     { title: 'Zelda , Breath of fresh Air', rating: 5, body: 'lorem ipsum', key: '1' },
     { title: 'Gota catch them all', rating: 4, body: 'lorem ipsum', key: '2' },
     { title: 'This is a rating text', rating: 2, body: 'lorem ipsum', key: '3' },
   ]);
 
-  const [modalOpen, setModalOpen] = useState(false);
+  const addReview = (review) => {
+    review.key = Math.random().toString();
+    setReview((currentReview) => {
+      return [review, ...currentReview];
+    });
+    setModalOpen(false);
+  };
 
   return (
     <View style={globalStyles.container}>
       <Modal visible={modalOpen} animationType="fade">
-        <View style={styles.modalContent}>
-          <MaterialIcons
-            name="close"
-            size={24}
-            onPress={() => setModalOpen(false)}
-            style={{ ...styles.modalToggle, ...styles.modalClose }}
-          />
-          <Text> Hello Modals</Text>
-        </View>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.modalContent}>
+            <MaterialIcons
+              name="close"
+              size={24}
+              onPress={() => setModalOpen(false)}
+              style={{ ...styles.modalToggle, ...styles.modalClose }}
+            />
+            <ReviewForm addReview={addReview} />
+          </View>
+        </TouchableWithoutFeedback>
       </Modal>
       <MaterialIcons
         name="add"
@@ -62,7 +81,7 @@ const styles = StyleSheet.create({
   },
 
   modalClose: {
-    marginTop: 20,
+    marginTop: 50,
     marginBottom: 0,
   },
 });
